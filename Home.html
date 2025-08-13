@@ -1,119 +1,512 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PIMpink | ink is for pimpink</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="description" content="$PINK — the soft degen butterfly on Ink. No roadmap, just vibes and community. Trade on InkyPump and flutter with us." />
+  <meta property="og:title" content="PIMpink | $PINK on Ink" />
+  <meta property="og:description" content="ink is for pimpink — and pimpink is for the people. Join the flutter." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A6%8B%3C/text%3E%3C/svg%3E" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top left, #2d0b45, #000000);
-      color: #f9f9f9;
-      text-align: center;
-      overflow-x: hidden;
+    :root{
+      /* — Purple Aurora Theme — */
+      --bg:#0c0614;
+      --bg-2:#140a22;
+      --ink-1:#7c3aed;
+      --ink-2:#a855f7;
+      --ink-3:#c084fc;
+      --ink-4:#f0abfc;
+      --accent:#ff66cc;
+      --outline:rgba(255,255,255,.10);
+      --glass:rgba(255,255,255,.06);
+      --text:#f7f7fb;
+      --muted:#c8c1d7;
+      --shadow:0 12px 40px rgba(124,58,237,.28);
+      --glow:0 0 0 2px rgba(168,85,247,.35), 0 0 30px rgba(192,132,252,.25);
     }
-    header {
-      padding: 3rem 1rem;
-      animation: fadeIn 1.5s ease-in-out;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Arial,sans-serif; color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(168,85,247,.25), transparent 60%),
+        radial-gradient(1000px 600px at 90% 10%, rgba(240,171,252,.18), transparent 55%),
+        radial-gradient(900px 700px at 50% 120%, rgba(124,58,237,.20), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      overflow-x:hidden;
     }
-    .logo {
-      font-size: 3rem;
-      color: #b84dff;
-      text-shadow: 0 0 10px #bb00ff;
-      animation: float 2.5s ease-in-out infinite;
-    }
-    .subtitle {
-      font-size: 1.2rem;
-      color: #bbbbbb;
-    }
-    .highlight {
-      color: #bb00ff;
-    }
-    .section {
-      padding: 4rem 1rem;
-      background: rgba(54, 0, 99, 0.4);
-      margin-top: 2rem;
-      border-radius: 1rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 0 20px rgba(255, 0, 255, 0.1);
-      animation: fadeInUp 1s ease both;
-    }
-    a {
-      color: #ff66cc;
-      text-decoration: none;
-    }
-    .cta {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 1rem 2rem;
-      background: linear-gradient(to right, #b84dff, #ff66cc);
-      color: black;
-      border-radius: 999px;
-      font-weight: bold;
-      transition: transform 0.2s ease;
-    }
-    .cta:hover {
-      transform: scale(1.05);
-    }
-    footer {
-      margin-top: 4rem;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #888;
-    }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(40px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
+    a{color:var(--ink-3); text-decoration:none}
+    .container{max-width:1100px; margin:0 auto; padding:0 22px}
+
+    .blob{position:fixed; inset:auto; pointer-events:none; filter:blur(40px); opacity:.35; mix-blend:screen}
+    .blob.b1{top:-80px; left:-60px; width:420px; height:420px; background:radial-gradient(circle,var(--ink-2),transparent 60%); animation:float 11s ease-in-out infinite}
+    .blob.b2{top:20vh; right:-80px; width:520px; height:520px; background:radial-gradient(circle,var(--ink-4),transparent 60%); animation:float 13s ease-in-out infinite reverse}
+    .blob.b3{bottom:-120px; left:20vw; width:560px; height:560px; background:radial-gradient(circle,var(--ink-1),transparent 60%); animation:float 15s ease-in-out infinite}
+
+    .nav{position:sticky; top:0; z-index:30; backdrop-filter:saturate(160%) blur(10px); background:linear-gradient(to right, rgba(12,6,20,.65), rgba(12,6,20,.35)); border-bottom:1px solid var(--outline)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{font-size:28px; filter:drop-shadow(0 0 10px rgba(192,132,252,.55))}
+    .brand h1{margin:0; font-size:18px; letter-spacing:.4px; font-weight:800; background:linear-gradient(90deg,var(--ink-3),var(--ink-1)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .actions{display:flex; gap:10px}
+
+    .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 18px; border-radius:14px; font-weight:700; border:1px solid var(--outline); cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease}
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:linear-gradient(90deg, var(--ink-2), var(--ink-4)); color:#11091c; box-shadow:var(--glow)}
+    .btn-primary:hover{box-shadow:0 0 0 3px rgba(192,132,252,.25), 0 0 36px rgba(168,85,247,.35)}
+    .btn-ghost{background:var(--glass); color:var(--text)}
+
+    header.hero{padding:80px 0 36px; text-align:center; animation:fadeIn .8s ease both}
+    .hero .tag{display:inline-block; font-size:12px; letter-spacing:.6px; text-transform:uppercase; color:#ffe; background:rgba(255,255,255,.06); border:1px solid var(--outline); padding:6px 10px; border-radius:999px}
+    .title{font-size:58px; line-height:1.02; margin:14px 0 10px; background:linear-gradient(90deg, var(--ink-3), var(--ink-1), var(--ink-4)); -webkit-background-clip:text; background-clip:text; color:transparent; animation:shine 6s linear infinite; background-size:200% auto}
+    .subtitle{font-size:17px; color:var(--muted)}
+
+    section.section{margin:32px auto; padding:42px 28px; background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04)); border:1px solid var(--outline); border-radius:22px; box-shadow:var(--shadow); transform-style:preserve-3d}
+    section.section:hover{transform:perspective(1000px) rotateX(.6deg) rotateY(.6deg)}
+    section h2{margin:0 0 10px; font-size:30px; background:linear-gradient(90deg,var(--ink-3),var(--ink-2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    section p{color:#ece9f8; opacity:.95}
+
+    .grid{display:grid; gap:18px}
+    @media(min-width:760px){ .grid-cols-2{grid-template-columns:1fr 1fr} }
+
+    .pill{display:inline-block; padding:8px 12px; border-radius:999px; font-size:12px; background:rgba(255,255,255,.06); border:1px solid var(--outline)}
+    .kbd{font:600 12px/1 Inter,system-ui; background:#120b1c; padding:4px 8px; border-radius:8px; border:1px solid #2a1b3b}
+
+    footer{margin:42px 0 46px; text-align:center; color:#b5a9cf}
+
+    @keyframes fadeIn{from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    @keyframes shine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease}
+    .reveal.visible{opacity:1; transform:translateY(0)}
+
+    /* Floating Share FAB */
+    #fabShare{position:fixed; right:18px; bottom:18px; z-index:50; border:none; border-radius:14px; padding:14px 16px;
+      background:linear-gradient(90deg,var(--ink-2),var(--ink-4)); color:#11091c; box-shadow:var(--glow); cursor:pointer}
   </style>
 </head>
 <body>
-  <header>
-    <div class="logo">🦋 $PINK</div>
-    <div class="subtitle">ink is for pimpink — and pimpink is for the people.</div>
+  <!-- Decorative aurora blobs -->
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+
+  <!-- Topbar -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">🦋</div>
+        <h1>$PINK on Ink</h1>
+      </div>
+      <div class="actions">
+        <a href="#buy" class="btn btn-primary">Trade Now</a>
+        <a href="#airdrop" class="btn btn-ghost">Airdrop</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <span class="tag">ink is for pimpink</span>
+      <h2 class="title">ink is for pimpink — and pimpink is for the people.</h2>
+      <p class="subtitle">No roadmap. No promises. Just purple vibes, flutter, and community.</p>
+      <div style="margin-top:20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
+        <a class="btn btn-primary" href="#buy">Buy $PINK</a>
+        <a class="btn btn-ghost" href="https://x.com/Pinkoninkchain" target="_blank" rel="noreferrer">Follow on X</a>
+      </div>
+    </div>
   </header>
 
-  <section class="section">
-    <h2>✨ The PIMpink Story</h2>
-    <p>Once upon a chain... while everyone was busy aping frogs and chasing dogs, a soft butterfly emerged from the ink.</p>
-    <p>It didn’t scream utility. It whispered **vibes**. No roadmap. No devs doxxed. Just pink, flutter, and community.</p>
-    <p>They called it <strong>$PINK</strong> — and it wasn’t just a memecoin. It was a statement. A rebellion with glitter.</p>
-    <p>So if you’re here... you’re not just early. You’re different. You vibe. 🦋</p>
-  </section>
+  <main class="container">
+    <!-- Story -->
+    <section class="section reveal" id="story">
+      <h2>✨ The PIMpink Story</h2>
+      <p>Once upon a chain… while everyone aped frogs and chased dogs, a soft butterfly emerged from the ink.</p>
+      <p>It didn’t scream utility. It whispered <em>vibes</em>. No roadmap. No doxx. Just purple, flutter, and community.</p>
+      <p>They called it <strong>$PINK</strong> — not just a memecoin, but a glittery rebellion.</p>
+      <p>If you’re here, you’re early — and you’re different. You vibe. 🦋</p>
+    </section>
 
-  <section class="section">
-    <h2>🚀 BOOSTED & 👑 KING OF THE INK</h2>
-    <p>$PINK is taking over InkyPump with pure vibes and soft degen energy.</p>
-    <p>Join the flutter while it's early. 70%+ funded and still vibing 💅</p>
-    <a class="cta" href="https://inkypump.com/trade/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank">Trade Now</a>
-  </section>
+    <!-- Trade / Contract -->
+    <section class="section reveal" id="buy">
+      <div class="grid grid-cols-2">
+        <div>
+          <h2>🚀 Boosted & 👑 King of the Ink</h2>
+          <p>$PINK is taking over InkyPump with pure vibes and soft degen energy. Join the flutter while it’s early. 70%+ funded and still vibing 💅</p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
+            <a class="btn btn-primary" href="https://inkypump.com/trade/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noreferrer">Trade on InkyPump</a>
+            <a class="btn btn-ghost" href="https://explorer.inkonchain.com/address/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noreferrer">View on Explorer</a>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--glass); border:1px solid var(--outline); border-radius:20px; padding:18px; box-shadow:var(--shadow)">
+            <div class="pill" style="margin-bottom:10px">Contract</div>
+            <code id="contract" style="display:block; word-break:break-all; font-size:14px">0xc86048B731682f7f3f94a16d29749CaaD99085bC</code>
+            <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+              <button class="btn btn-ghost" id="copyBtn">Copy</button>
+              <button class="btn btn-ghost" id="watchBtn">Add $PINK to Wallet</button>
+            </div>
+            <hr style="border:none; border-top:1px solid var(--outline); margin:14px 0" />
+            <div class="pill" style="margin-bottom:10px">Ink Network</div>
+            <p style="margin:6px 0 10px; color:#ddd">
+              Chain ID <span class="kbd">57073</span> (<span class="kbd">0xDEF1</span>) • Currency <span class="kbd">ETH</span><br>
+              RPC <span class="kbd">https://rpc-gel.inkonchain.com</span>
+            </p>
+            <button class="btn btn-primary" id="addChainBtn">Add Ink to MetaMask</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <section class="section">
-    <h2>💬 Join Our Telegram</h2>
-    <p>We don’t grind. We vibe. Come meme, chat, and flutter with us:</p>
-    <a href="https://t.me/pinmpink" class="cta" target="_blank">Join the FlutterGang 🦋</a>
-  </section>
+    <!-- Share-to-Earn Airdrop -->
+    <section class="section reveal" id="airdrop">
+      <h2>🎁 Share‑to‑Earn Airdrop</h2>
+      <p>Invite frens, earn points, and unlock the <strong>$PINK</strong></p>
 
-  <section class="section">
-    <h2>🐦 Follow Us on X</h2>
-    <p>We live in the ink. We post the pink.</p>
-    <a href="https://x.com/Pinkoninkchain" target="_blank">@Pinkoninkchain</a>
-  </section>
+      <div class="grid grid-cols-2" style="margin-top:14px">
+        <div>
+          <div style="background:var(--glass); border:1px solid var(--outline); border-radius:20px; padding:18px; box-shadow:var(--shadow)">
+            <div class="pill" style="margin-bottom:10px">Your referral link</div>
+            <code id="refLink" style="display:block; word-break:break-all; font-size:14px">Generating…</code>
+            <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+              <button class="btn btn-ghost" id="copyRefBtn">Copy Link</button>
+              <a class="btn btn-primary" id="tweetBtn" target="_blank" rel="noreferrer">Tweet Link</a>
+              <button class="btn btn-ghost" id="connectBtn">Connect Wallet</button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="background:var(--glass); border:1px solid var(--outline); border-radius:20px; padding:18px; box-shadow:var(--shadow)">
+            <div class="pill" style="margin-bottom:10px">Your progress</div>
+            <p style="margin:0 0 10px">Points: <strong id="points">0</strong> / <span id="goal">25</span></p>
+            <div style="height:12px; background:#1a1226; border:1px solid #2a1b3b; border-radius:999px; overflow:hidden">
+              <div id="bar" style="height:100%; width:0%; background:linear-gradient(90deg,var(--ink-2),var(--ink-4));"></div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+              <button class="btn btn-primary" id="claimBtn" disabled>Claim Airdrop</button>
+              <span class="pill" id="status">Share to reach the goal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p style="margin-top:12px; color:#bfb6d3; font-size:13px">No IP limits. Each browser/device keeps its own points. For cross‑device totals, add a backend later.</p>
+    </section>
+
+    <!-- Quick Share (ref-aware) -->
+    <section class="section reveal" id="share">
+      <h2>🔗 Share $PINK in one tap</h2>
+      <p>Your referral link is used automatically when available.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
+        <button class="btn btn-primary" id="btnShare">Share</button>
+        <button class="btn btn-ghost" id="btnCopyShare">Copy Link</button>
+        <a class="btn btn-ghost" id="shareTwitter" target="_blank" rel="noreferrer">Twitter</a>
+        <a class="btn btn-ghost" id="shareTelegram" target="_blank" rel="noreferrer">Telegram</a>
+        <a class="btn btn-ghost" id="shareFacebook" target="_blank" rel="noreferrer">Facebook</a>
+        <a class="btn btn-ghost" id="shareWhatsApp" target="_blank" rel="noreferrer">WhatsApp</a>
+      </div>
+    </section>
+
+    <!-- Reactions & Comments -->
+    <section class="section reveal" id="reactions">
+      <h2>💟 React & Comment</h2>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
+        <button class="btn btn-ghost" data-emoji="👍">👍 <span class="count" id="count-like">0</span></button>
+        <button class="btn btn-ghost" data-emoji="💜">💜 <span class="count" id="count-love">0</span></button>
+        <button class="btn btn-ghost" data-emoji="🦋">🦋 <span class="count" id="count-butter">0</span></button>
+      </div>
+      <div style="margin-top:14px">
+        <form id="commentForm" style="display:flex; gap:10px; flex-wrap:wrap">
+          <textarea id="commentInput" rows="3" placeholder="Say something nice…" style="flex:1; min-width:260px; background:var(--glass); border:1px solid var(--outline); border-radius:12px; padding:10px; color:var(--text)"></textarea>
+          <button class="btn btn-primary" type="submit" id="commentSubmit">Post</button>
+        </form>
+        <ul id="commentList" style="list-style:none; padding:0; margin-top:12px; display:grid; gap:8px"></ul>
+        <p style="margin-top:8px; color:#b5a9d3; font-size:12px">Comments & reactions are saved on this device only (no server).</p>
+      </div>
+    </section>
+
+    <!-- Community / Socials -->
+    <section class="section reveal" id="community">
+      <h2>💬 Join Our Telegram</h2>
+      <p>We don’t grind. We vibe. Come meme, chat, and flutter with us:</p>
+      <p><a class="btn btn-primary" href="https://t.me/pinmpink" target="_blank" rel="noreferrer">Join the FlutterGang 🦋</a></p>
+    </section>
+
+    <section class="section reveal" id="socials">
+      <h2>🐦 Follow Us on X</h2>
+      <p>We live in the ink. We post the pink.</p>
+      <p><a href="https://x.com/Pinkoninkchain" class="btn btn-ghost" target="_blank" rel="noreferrer">@Pinkoninkchain</a></p>
+    </section>
+  </main>
 
   <footer>
-    &copy; 2025 PIMpink. inkchain forever.
+    &copy; <span id="year"></span> PIMpink. inkchain forever.
   </footer>
+
+  <!-- Floating Share Button -->
+  <button id="fabShare" aria-label="Share" title="Share">🔗 Share</button>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold:.14 });
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // Copy contract
+    const copyBtn = document.getElementById('copyBtn');
+    copyBtn?.addEventListener('click', async () => {
+      const contract = document.getElementById('contract').textContent.trim();
+      try { await navigator.clipboard.writeText(contract); copyBtn.textContent = 'Copied!'; setTimeout(()=>copyBtn.textContent='Copy', 1400); } catch(e){ alert('Copy failed'); }
+    });
+
+    // Add token to wallet
+    const watchBtn = document.getElementById('watchBtn');
+    watchBtn?.addEventListener('click', async () => {
+      const wasAdded = await window.ethereum?.request?.({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: '0xc86048B731682f7f3f94a16d29749CaaD99085bC',
+            symbol: 'PINK',
+            decimals: 18,
+            image: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pinterest.svg' // placeholder
+          }
+        }
+      });
+      if (!wasAdded) console.log('User rejected watchAsset');
+    });
+
+    // Add Ink to MetaMask
+    const addChainBtn = document.getElementById('addChainBtn');
+    addChainBtn?.addEventListener('click', async () => {
+      try {
+        await window.ethereum?.request?.({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0xDEF1', // 57073
+            chainName: 'Ink',
+            nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+            rpcUrls: ['https://rpc-gel.inkonchain.com'],
+            blockExplorerUrls: ['https://explorer.inkonchain.com']
+          }]
+        });
+      } catch (e) { console.error(e); }
+    });
+
+    // ===== Share-to-Earn Airdrop (FRONTEND-ONLY, NO BACKEND) =====
+    const AIRDROP_GOAL = 25;                // change your goal
+    const STORAGE_KEY = 'pink_user_id';     // current user id (wallet or random)
+    const POINTS_MAP_KEY = 'pink_points_map'; // map: { [ref_id]: number }
+
+    const pointsEl  = document.getElementById('points');
+    const goalEl    = document.getElementById('goal');
+    const barEl     = document.getElementById('bar');
+    const statusEl  = document.getElementById('status');
+    const claimBtn  = document.getElementById('claimBtn');
+    const refLinkEl = document.getElementById('refLink');
+    const copyRefBtn= document.getElementById('copyRefBtn');
+    const connectBtn= document.getElementById('connectBtn');
+    const tweetBtn  = document.getElementById('tweetBtn');
+
+    goalEl.textContent = AIRDROP_GOAL;
+
+    function loadMap(){
+      try { return JSON.parse(localStorage.getItem(POINTS_MAP_KEY) || '{}'); }
+      catch { return {}; }
+    }
+    function saveMap(m){ localStorage.setItem(POINTS_MAP_KEY, JSON.stringify(m)); }
+
+    async function getUserId(){
+      let id = localStorage.getItem(STORAGE_KEY);
+      // Prefer connected wallet if present
+      try {
+        const accs = await window.ethereum?.request?.({ method:'eth_accounts' });
+        if (accs && accs[0]) id = accs[0].toLowerCase();
+      } catch {}
+      if(!id){
+        id = 'user_' + Math.random().toString(36).slice(2,10);
+        localStorage.setItem(STORAGE_KEY, id);
+      }
+      return id;
+    }
+
+    async function buildReferral(){
+      const uid = await getUserId();
+      const base = location.origin + location.pathname;
+      const url  = base + '?ref=' + encodeURIComponent(uid);
+      refLinkEl.textContent = url;
+      tweetBtn.href = 'https://twitter.com/intent/tweet?text='
+        + encodeURIComponent('Join $PINK on Ink — Share-to-Earn Airdrop! 🦋')
+        + '&url=' + encodeURIComponent(url)
+        + '&hashtags=PIMpink,InkOnChain,airdrop';
+      buildShareLinks(uid); // also wire the share section
+    }
+
+    // CREDIT: increments referrer’s count in THIS browser’s localStorage
+    function creditReferral(ref){
+      const map = loadMap();
+      map[ref] = (map[ref] || 0) + 1;   // count every click (no IP, no 24h limit)
+      saveMap(map);
+      return map[ref];
+    }
+
+    async function renderMyProgress(){
+      const uid  = await getUserId();
+      const map  = loadMap();
+      const total= map[uid] || 0;
+      pointsEl.textContent = total;
+      const pct = Math.min(100, Math.round((total / AIRDROP_GOAL) * 100));
+      barEl.style.width = pct + '%';
+      claimBtn.disabled = total < AIRDROP_GOAL;
+      statusEl.textContent = total >= AIRDROP_GOAL
+        ? 'Goal reached! You can claim.'
+        : 'Share to reach the goal';
+    }
+
+    // Handle visits like ?ref=<referrer_id>
+    (function handleReferral(){
+      const params = new URLSearchParams(location.search);
+      const ref = params.get('ref');
+      if(!ref) return;
+      getUserId().then((uid)=>{
+        if(ref === uid){ statusEl.textContent = 'Self-ref ignored (use another browser)'; return; }
+        creditReferral(ref);
+        statusEl.textContent = 'Thanks! Referral credited (local)';
+        renderMyProgress(); // update if referrer is also viewing on same device
+      });
+    })();
+
+    // Claim (demo only, no on-chain distribution here)
+    claimBtn?.addEventListener('click', async () => {
+      claimBtn.disabled = true;
+      statusEl.textContent = 'Claim submitted (demo).';
+      await new Promise(r=>setTimeout(r, 600));
+      statusEl.textContent = 'Claim recorded locally. Add a backend to distribute tokens.';
+    });
+
+    // Copy referral link
+    copyRefBtn?.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(refLinkEl.textContent.trim());
+        copyRefBtn.textContent = 'Copied!';
+        setTimeout(()=>copyRefBtn.textContent='Copy Link', 1400);
+      } catch { alert('Copy failed'); }
+    });
+
+    // Connect wallet (sets userId = wallet)
+    connectBtn?.addEventListener('click', async () => {
+      try{
+        const accounts = await window.ethereum?.request?.({ method:'eth_requestAccounts' });
+        if(accounts && accounts[0]){
+          localStorage.setItem(STORAGE_KEY, accounts[0].toLowerCase());
+          connectBtn.textContent = 'Wallet Connected';
+          await buildReferral();
+          await renderMyProgress();
+        }
+      }catch(e){ console.warn('Wallet connect declined'); }
+    });
+
+    // ===== One‑tap Share / Share Bar =====
+    function currentShareLink(){
+      const t = document.getElementById('refLink');
+      const url = (t && t.textContent.trim()) ? t.textContent.trim() : (location.origin + location.pathname);
+      return url;
+    }
+    function shareText(){ return 'Join $PINK on Ink — soft vibes only 🦋'; }
+
+    async function nativeShare(){
+      const url = currentShareLink();
+      const data = { title: '$PINK on Ink', text: shareText(), url };
+      if(navigator.share){
+        try { await navigator.share(data); } catch(e){}
+      } else {
+        try { await navigator.clipboard.writeText(url); alert('Link copied!'); } catch { window.open(url, '_blank'); }
+      }
+    }
+
+    function buildShareLinks(uid){
+      const url = location.origin + location.pathname + '?ref=' + encodeURIComponent(uid);
+      const text = shareText();
+      const tw = document.getElementById('shareTwitter');
+      const tg = document.getElementById('shareTelegram');
+      const fb = document.getElementById('shareFacebook');
+      const wa = document.getElementById('shareWhatsApp');
+      if(tw) tw.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url) + '&hashtags=PIMpink,InkOnChain,airdrop';
+      if(tg) tg.href = 'https://t.me/share/url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text);
+      if(fb) fb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+      if(wa) wa.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(text + ' ' + url);
+      document.getElementById('btnCopyShare')?.addEventListener('click', async ()=>{ try{ await navigator.clipboard.writeText(url); }catch{} });
+    }
+
+    document.getElementById('btnShare')?.addEventListener('click', nativeShare);
+    document.getElementById('fabShare')?.addEventListener('click', nativeShare);
+
+    // ===== Reactions (localStorage) =====
+    const POST_ID = 'home';
+    const REACT_KEY = 'pink_react_' + POST_ID;
+    function loadReacts(){ try { return JSON.parse(localStorage.getItem(REACT_KEY) || '{}'); } catch { return {}; } }
+    function saveReacts(m){ localStorage.setItem(REACT_KEY, JSON.stringify(m)); }
+    function renderReacts(){
+      const m = loadReacts();
+      const likeEl = document.getElementById('count-like');
+      const loveEl = document.getElementById('count-love');
+      const butterEl = document.getElementById('count-butter');
+      if(likeEl) likeEl.textContent = m['👍'] || 0;
+      if(loveEl) loveEl.textContent = m['💜'] || 0;
+      if(butterEl) butterEl.textContent = m['🦋'] || 0;
+    }
+    document.querySelectorAll('#reactions [data-emoji]')?.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const m = loadReacts();
+        const e = btn.getAttribute('data-emoji');
+        m[e] = (m[e] || 0) + 1;
+        saveReacts(m); renderReacts();
+      });
+    });
+    renderReacts();
+
+    // ===== Comments (localStorage) =====
+    const COMMENTS_KEY = 'pink_comments_' + POST_ID;
+    function loadComments(){ try { return JSON.parse(localStorage.getItem(COMMENTS_KEY) || '[]'); } catch { return []; } }
+    function saveComments(arr){ localStorage.setItem(COMMENTS_KEY, JSON.stringify(arr)); }
+    function renderComments(){
+      const list = document.getElementById('commentList');
+      if(!list) return;
+      list.innerHTML = '';
+      loadComments().forEach(({t,ts})=>{
+        const li = document.createElement('li');
+        li.style.cssText = 'background:var(--glass); border:1px solid var(--outline); border-radius:12px; padding:10px;';
+        const small = new Date(ts).toLocaleString();
+        li.innerHTML = `<div style="font-size:14px">${t.replace(/</g,'&lt;')}</div><div style="color:#bfb6d3; font-size:12px; margin-top:4px">${small}</div>`;
+        list.appendChild(li);
+      });
+    }
+    renderComments();
+
+    document.getElementById('commentForm')?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const input = document.getElementById('commentInput');
+      const text = (input.value || '').trim();
+      if(!text) return;
+      const arr = loadComments();
+      arr.unshift({ t: text.slice(0, 280), ts: Date.now() });
+      saveComments(arr); input.value=''; renderComments();
+    });
+
+    // Boot
+    renderMyProgress();
+    buildReferral();
+  </script>
 </body>
 </html>
