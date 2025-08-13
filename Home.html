@@ -2,32 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>PIMpink | ink is for pimpink</title>
   <meta name="description" content="$PINK — the soft degen butterfly on Ink. No roadmap, just vibes and community. Trade on InkyPump and flutter with us." />
+
+  <!-- Canonical + Theme -->
+  <link rel="canonical" href="https://pimpink.example/" />
+  <meta name="theme-color" content="#7c3aed" />
+
+  <!-- Open Graph / Twitter -->
   <meta property="og:title" content="PIMpink | $PINK on Ink" />
   <meta property="og:description" content="ink is for pimpink — and pimpink is for the people. Join the flutter." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pimpink.example/" />
+  <meta property="og:image" content="https://pimpink.example/og-pink.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="PIMpink | $PINK on Ink" />
+  <meta name="twitter:description" content="ink is for pimpink — and pimpink is for the people. Join the flutter." />
+  <meta name="twitter:image" content="https://pimpink.example/og-pink.jpg" />
+
+  <!-- Fonts & Icon -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='52'%3E%F0%9F%A6%8B%3C/text%3E%3C/svg%3E" />
+
   <style>
     :root{
       /* — Purple Aurora Theme — */
-      --bg:#0c0614;
-      --bg-2:#140a22;
-      --ink-1:#7c3aed;
-      --ink-2:#a855f7;
-      --ink-3:#c084fc;
-      --ink-4:#f0abfc;
-      --accent:#ff66cc;
-      --outline:rgba(255,255,255,.10);
-      --glass:rgba(255,255,255,.06);
-      --text:#f7f7fb;
-      --muted:#c8c1d7;
-      --shadow:0 12px 40px rgba(124,58,237,.28);
+      --bg:#0c0614; --bg-2:#140a22;
+      --ink-1:#7c3aed; --ink-2:#a855f7; --ink-3:#c084fc; --ink-4:#f0abfc;
+      --accent:#ff66cc; --outline:rgba(255,255,255,.10); --glass:rgba(255,255,255,.06);
+      --text:#f7f7fb; --muted:#c8c1d7; --shadow:0 12px 40px rgba(124,58,237,.28);
       --glow:0 0 0 2px rgba(168,85,247,.35), 0 0 30px rgba(192,132,252,.25);
+      --safe-b: env(safe-area-inset-bottom);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -39,6 +48,10 @@
         radial-gradient(900px 700px at 50% 120%, rgba(124,58,237,.20), transparent 60%),
         linear-gradient(180deg, var(--bg), var(--bg-2));
       overflow-x:hidden;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .blob{animation:none !important}
+      .reveal{transition:none !important}
     }
     a{color:var(--ink-3); text-decoration:none}
     .container{max-width:1100px; margin:0 auto; padding:0 22px}
@@ -57,6 +70,7 @@
 
     .btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:12px 18px; border-radius:14px; font-weight:700; border:1px solid var(--outline); cursor:pointer; transition:transform .15s ease, box-shadow .2s ease, background .2s ease, opacity .2s ease}
     .btn:hover{transform:translateY(-1px)}
+    .btn:focus-visible{outline:3px solid var(--ink-3); outline-offset:2px}
     .btn-primary{background:linear-gradient(90deg, var(--ink-2), var(--ink-4)); color:#11091c; box-shadow:var(--glow)}
     .btn-primary:hover{box-shadow:0 0 0 3px rgba(192,132,252,.25), 0 0 36px rgba(168,85,247,.35)}
     .btn-ghost{background:var(--glass); color:var(--text)}
@@ -88,13 +102,50 @@
     /* Floating Share FAB */
     #fabShare{position:fixed; right:18px; bottom:18px; z-index:50; border:none; border-radius:14px; padding:14px 16px;
       background:linear-gradient(90deg,var(--ink-2),var(--ink-4)); color:#11091c; box-shadow:var(--glow); cursor:pointer}
+
+    /* Mobile helpers */
+    .mobile-only{display:none}
+    .desktop-only{display:initial}
+
+    @media (max-width: 480px){
+      body{overflow-x:hidden}
+      .blob{display:none}
+      header.hero{padding:54px 0 22px}
+      .title{font-size:36px; line-height:1.08}
+      .subtitle{font-size:15px}
+      .nav-inner{padding:10px 0}
+      .actions .btn{padding:10px 14px; border-radius:12px}
+      section.section{margin:20px auto; padding:22px 16px; border-radius:18px}
+      .btn{padding:14px 16px; border-radius:14px}
+      .btn, .btn-primary, .btn-ghost{min-height:48px}
+      .btn-block{width:100%}
+      code, .kbd{font-size:12px}
+      #fabShare{right:14px; bottom:calc(86px + var(--safe-b))}
+      .cta-mobile{display:flex}
+      .desktop-only{display:none}
+      .mobile-only{display:flex}
+      /* hamburger */
+      .hamburger{display:flex; flex-direction:column; gap:3px; background:var(--glass); border:1px solid var(--outline); padding:10px; border-radius:10px}
+      .hamburger .bar{width:20px; height:2px; background:#fff; display:block}
+      /* drawer */
+      .drawer{position:fixed; inset:0; background:rgba(0,0,0,.5); backdrop-filter:blur(2px); z-index:80; display:none}
+      .drawer[aria-hidden="false"]{display:block}
+      .drawer-inner{position:absolute; right:0; top:0; bottom:0; width:78%; max-width:320px; background:#140a22; border-left:1px solid var(--outline); padding:18px; display:flex; flex-direction:column; gap:10px; box-shadow:var(--shadow)}
+      .drawer-link{padding:14px; border:1px solid var(--outline); border-radius:12px; background:var(--glass); font-weight:700}
+      .drawer-close{position:absolute; top:10px; right:10px; background:transparent; border:none; font-size:22px; color:#fff}
+    }
+
+    @media (max-width: 360px){
+      .title{font-size:32px}
+      .subtitle{font-size:14px}
+    }
   </style>
 </head>
 <body>
   <!-- Decorative aurora blobs -->
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
+  <div class="blob b1" aria-hidden="true"></div>
+  <div class="blob b2" aria-hidden="true"></div>
+  <div class="blob b3" aria-hidden="true"></div>
 
   <!-- Topbar -->
   <div class="nav">
@@ -103,12 +154,29 @@
         <div class="logo" aria-hidden="true">🦋</div>
         <h1>$PINK on Ink</h1>
       </div>
-      <div class="actions">
+      <div class="actions desktop-only">
         <a href="#buy" class="btn btn-primary">Trade Now</a>
         <a href="#airdrop" class="btn btn-ghost">Airdrop</a>
       </div>
+      <button class="hamburger mobile-only" id="hamburger" aria-label="Open menu" aria-controls="drawer" aria-expanded="false" style="display:none">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
     </div>
   </div>
+
+  <!-- Mobile Drawer -->
+  <nav id="drawer" class="drawer" aria-hidden="true">
+    <div class="drawer-inner">
+      <a class="drawer-link" href="#buy">Buy $PINK</a>
+      <a class="drawer-link" href="#airdrop">Airdrop</a>
+      <a class="drawer-link" href="#share">Share</a>
+      <a class="drawer-link" href="#community">Telegram</a>
+      <a class="drawer-link" href="#socials">X / Twitter</a>
+    </div>
+    <button id="drawerClose" class="drawer-close" aria-label="Close menu">✕</button>
+  </nav>
 
   <!-- Hero -->
   <header class="hero">
@@ -118,7 +186,7 @@
       <p class="subtitle">No roadmap. No promises. Just purple vibes, flutter, and community.</p>
       <div style="margin-top:20px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap">
         <a class="btn btn-primary" href="#buy">Buy $PINK</a>
-        <a class="btn btn-ghost" href="https://x.com/Pinkoninkchain" target="_blank" rel="noreferrer">Follow on X</a>
+        <a class="btn btn-ghost" href="https://x.com/Pinkoninkchain" target="_blank" rel="noopener noreferrer">Follow on X</a>
       </div>
     </div>
   </header>
@@ -140,8 +208,8 @@
           <h2>🚀 Boosted & 👑 King of the Ink</h2>
           <p>$PINK is taking over InkyPump with pure vibes and soft degen energy. Join the flutter while it’s early. 70%+ funded and still vibing 💅</p>
           <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
-            <a class="btn btn-primary" href="https://inkypump.com/trade/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noreferrer">Trade on InkyPump</a>
-            <a class="btn btn-ghost" href="https://explorer.inkonchain.com/address/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noreferrer">View on Explorer</a>
+            <a class="btn btn-primary" href="https://inkypump.com/trade/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noopener noreferrer">Trade on InkyPump</a>
+            <a class="btn btn-ghost" href="https://explorer.inkonchain.com/address/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noopener noreferrer">View on Explorer</a>
           </div>
         </div>
         <div>
@@ -149,8 +217,8 @@
             <div class="pill" style="margin-bottom:10px">Contract</div>
             <code id="contract" style="display:block; word-break:break-all; font-size:14px">0xc86048B731682f7f3f94a16d29749CaaD99085bC</code>
             <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
-              <button class="btn btn-ghost" id="copyBtn">Copy</button>
-              <button class="btn btn-ghost" id="watchBtn">Add $PINK to Wallet</button>
+              <button class="btn btn-ghost" id="copyBtn" aria-label="Copy contract address">Copy</button>
+              <button class="btn btn-ghost" id="watchBtn" aria-label="Add $PINK to Wallet">Add $PINK to Wallet</button>
             </div>
             <hr style="border:none; border-top:1px solid var(--outline); margin:14px 0" />
             <div class="pill" style="margin-bottom:10px">Ink Network</div>
@@ -158,7 +226,7 @@
               Chain ID <span class="kbd">57073</span> (<span class="kbd">0xDEF1</span>) • Currency <span class="kbd">ETH</span><br>
               RPC <span class="kbd">https://rpc-gel.inkonchain.com</span>
             </p>
-            <button class="btn btn-primary" id="addChainBtn">Add Ink to MetaMask</button>
+            <button class="btn btn-primary" id="addChainBtn" aria-label="Add Ink network to MetaMask">Add Ink to MetaMask</button>
           </div>
         </div>
       </div>
@@ -175,8 +243,8 @@
             <div class="pill" style="margin-bottom:10px">Your referral link</div>
             <code id="refLink" style="display:block; word-break:break-all; font-size:14px">Generating…</code>
             <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
-              <button class="btn btn-ghost" id="copyRefBtn">Copy Link</button>
-              <a class="btn btn-primary" id="tweetBtn" target="_blank" rel="noreferrer">Tweet Link</a>
+              <button class="btn btn-ghost" id="copyRefBtn" aria-label="Copy referral link">Copy Link</button>
+              <a class="btn btn-primary" id="tweetBtn" target="_blank" rel="noopener noreferrer">Tweet Link</a>
               <button class="btn btn-ghost" id="connectBtn">Connect Wallet</button>
             </div>
           </div>
@@ -185,13 +253,14 @@
           <div style="background:var(--glass); border:1px solid var(--outline); border-radius:20px; padding:18px; box-shadow:var(--shadow)">
             <div class="pill" style="margin-bottom:10px">Your progress</div>
             <p style="margin:0 0 10px">Points: <strong id="points">0</strong> / <span id="goal">25</span></p>
-            <div style="height:12px; background:#1a1226; border:1px solid #2a1b3b; border-radius:999px; overflow:hidden">
+            <div style="height:12px; background:#1a1226; border:1px solid #2a1b3b; border-radius:999px; overflow:hidden" aria-label="Airdrop progress" role="progressbar" aria-valuemin="0" aria-valuemax="25" aria-valuenow="0">
               <div id="bar" style="height:100%; width:0%; background:linear-gradient(90deg,var(--ink-2),var(--ink-4));"></div>
             </div>
             <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
               <button class="btn btn-primary" id="claimBtn" disabled>Claim Airdrop</button>
               <span class="pill" id="status">Share to reach the goal</span>
             </div>
+            <p style="margin-top:8px; color:#bfb6d3; font-size:12px">Frontend-only demo. Add a backend or on-chain logic for real distribution.</p>
           </div>
         </div>
       </div>
@@ -206,10 +275,10 @@
       <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px">
         <button class="btn btn-primary" id="btnShare">Share</button>
         <button class="btn btn-ghost" id="btnCopyShare">Copy Link</button>
-        <a class="btn btn-ghost" id="shareTwitter" target="_blank" rel="noreferrer">Twitter</a>
-        <a class="btn btn-ghost" id="shareTelegram" target="_blank" rel="noreferrer">Telegram</a>
-        <a class="btn btn-ghost" id="shareFacebook" target="_blank" rel="noreferrer">Facebook</a>
-        <a class="btn btn-ghost" id="shareWhatsApp" target="_blank" rel="noreferrer">WhatsApp</a>
+        <a class="btn btn-ghost" id="shareTwitter" target="_blank" rel="noopener noreferrer">Twitter</a>
+        <a class="btn btn-ghost" id="shareTelegram" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a class="btn btn-ghost" id="shareFacebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+        <a class="btn btn-ghost" id="shareWhatsApp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
       </div>
     </section>
 
@@ -217,12 +286,13 @@
     <section class="section reveal" id="reactions">
       <h2>💟 React & Comment</h2>
       <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
-        <button class="btn btn-ghost" data-emoji="👍">👍 <span class="count" id="count-like">0</span></button>
-        <button class="btn btn-ghost" data-emoji="💜">💜 <span class="count" id="count-love">0</span></button>
-        <button class="btn btn-ghost" data-emoji="🦋">🦋 <span class="count" id="count-butter">0</span></button>
+        <button class="btn btn-ghost" data-emoji="👍" aria-pressed="false">👍 <span class="count" id="count-like">0</span></button>
+        <button class="btn btn-ghost" data-emoji="💜" aria-pressed="false">💜 <span class="count" id="count-love">0</span></button>
+        <button class="btn btn-ghost" data-emoji="🦋" aria-pressed="false">🦋 <span class="count" id="count-butter">0</span></button>
       </div>
       <div style="margin-top:14px">
         <form id="commentForm" style="display:flex; gap:10px; flex-wrap:wrap">
+          <label for="commentInput" class="visually-hidden">Your comment</label>
           <textarea id="commentInput" rows="3" placeholder="Say something nice…" style="flex:1; min-width:260px; background:var(--glass); border:1px solid var(--outline); border-radius:12px; padding:10px; color:var(--text)"></textarea>
           <button class="btn btn-primary" type="submit" id="commentSubmit">Post</button>
         </form>
@@ -235,15 +305,21 @@
     <section class="section reveal" id="community">
       <h2>💬 Join Our Telegram</h2>
       <p>We don’t grind. We vibe. Come meme, chat, and flutter with us:</p>
-      <p><a class="btn btn-primary" href="https://t.me/pinmpink" target="_blank" rel="noreferrer">Join the FlutterGang 🦋</a></p>
+      <p><a class="btn btn-primary" href="https://t.me/pinmpink" target="_blank" rel="noopener noreferrer">Join the FlutterGang 🦋</a></p>
     </section>
 
     <section class="section reveal" id="socials">
       <h2>🐦 Follow Us on X</h2>
       <p>We live in the ink. We post the pink.</p>
-      <p><a href="https://x.com/Pinkoninkchain" class="btn btn-ghost" target="_blank" rel="noreferrer">@Pinkoninkchain</a></p>
+      <p><a href="https://x.com/Pinkoninkchain" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">@Pinkoninkchain</a></p>
     </section>
   </main>
+
+  <!-- Sticky mobile CTA bar -->
+  <div class="cta-mobile mobile-only" style="position:fixed; left:12px; right:12px; bottom:12px; z-index:60; gap:10px; display:none; padding-bottom:var(--safe-b)">
+    <a class="btn btn-primary btn-block" href="#buy" aria-label="Buy $PINK">Buy $PINK</a>
+    <a class="btn btn-ghost btn-block" href="https://inkypump.com/trade/0xc86048B731682f7f3f94a16d29749CaaD99085bC" target="_blank" rel="noopener noreferrer" aria-label="Trade on InkyPump">Trade</a>
+  </div>
 
   <footer>
     &copy; <span id="year"></span> PIMpink. inkchain forever.
@@ -252,7 +328,35 @@
   <!-- Floating Share Button -->
   <button id="fabShare" aria-label="Share" title="Share">🔗 Share</button>
 
+  <!-- Structured data (basic) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"PIMpink",
+    "url":"https://pimpink.example/",
+    "logo":"https://pimpink.example/logo.png",
+    "sameAs":["https://x.com/Pinkoninkchain","https://t.me/pinmpink"]
+  }
+  </script>
+
   <script>
+    // Mobile drawer toggle + lazy images
+    (function(){
+      const body = document.body;
+      const btn = document.getElementById('hamburger');
+      const drawer = document.getElementById('drawer');
+      const closeBtn = document.getElementById('drawerClose');
+      function open(){ drawer?.setAttribute('aria-hidden','false'); btn?.setAttribute('aria-expanded','true'); body.style.overflow='hidden'; }
+      function close(){ drawer?.setAttribute('aria-hidden','true'); btn?.setAttribute('aria-expanded','false'); body.style.overflow=''; }
+      btn?.addEventListener('click', ()=>{ (drawer?.getAttribute('aria-hidden')!=='false') ? open() : close(); });
+      closeBtn?.addEventListener('click', close);
+      drawer?.addEventListener('click', (e)=>{ if(e.target===drawer) close(); });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') close(); });
+      // lazy any <img>
+      document.querySelectorAll('img:not([loading])').forEach(img=>{ img.loading='lazy'; img.decoding='async'; });
+    })();
+
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -272,19 +376,21 @@
     // Add token to wallet
     const watchBtn = document.getElementById('watchBtn');
     watchBtn?.addEventListener('click', async () => {
-      const wasAdded = await window.ethereum?.request?.({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: '0xc86048B731682f7f3f94a16d29749CaaD99085bC',
-            symbol: 'PINK',
-            decimals: 18,
-            image: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pinterest.svg' // placeholder
+      try{
+        const wasAdded = await window.ethereum?.request?.({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: '0xc86048B731682f7f3f94a16d29749CaaD99085bC',
+              symbol: 'PINK',
+              decimals: 18,
+              image: 'https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/pinterest.svg' // placeholder
+            }
           }
-        }
-      });
-      if (!wasAdded) console.log('User rejected watchAsset');
+        });
+        if (!wasAdded) console.log('User rejected watchAsset');
+      }catch(err){ console.warn('wallet_watchAsset failed', err); }
     });
 
     // Add Ink to MetaMask
@@ -368,6 +474,8 @@
       pointsEl.textContent = total;
       const pct = Math.min(100, Math.round((total / AIRDROP_GOAL) * 100));
       barEl.style.width = pct + '%';
+      const pb = barEl.parentElement;
+      pb?.setAttribute('aria-valuenow', String(Math.min(total, AIRDROP_GOAL)));
       claimBtn.disabled = total < AIRDROP_GOAL;
       statusEl.textContent = total >= AIRDROP_GOAL
         ? 'Goal reached! You can claim.'
@@ -383,7 +491,7 @@
         if(ref === uid){ statusEl.textContent = 'Self-ref ignored (use another browser)'; return; }
         creditReferral(ref);
         statusEl.textContent = 'Thanks! Referral credited (local)';
-        renderMyProgress(); // update if referrer is also viewing on same device
+        renderMyProgress();
       });
     })();
 
@@ -472,6 +580,8 @@
         const e = btn.getAttribute('data-emoji');
         m[e] = (m[e] || 0) + 1;
         saveReacts(m); renderReacts();
+        const pressed = btn.getAttribute('aria-pressed') === 'true';
+        btn.setAttribute('aria-pressed', String(!pressed));
       });
     });
     renderReacts();
